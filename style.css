@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap');
+
+/* ---------- theme colours (light is the default) ---------- */
+.stApp {
+  --bg: #fbfdfd;
+  --surface: #ffffff;
+  --mist: #eef4f5;
+  --ink: #14262e;
+  --ink-soft: #33454d;
+  --muted: #5a6b73;
+  --line: #d8e3e6;
+  --dash: #9fc0c4;
+  --track: #e3ecee;
+  --brand: #0a4a50;
+  --accent: #0f6b73;
+  --btn: #0f6b73;
+  --btn-hover: #0a4a50;
+  --code-bg: #eef4f5;
+  --code-ink: #0a4a50;
+  --ok: #1f7a4d;
+  --ok-bg: #e6f4ec;
+  --ok-line: #b9dfc9;
+  --alert: #b3392f;
+  --alert-bg: #fbebe9;
+  --alert-line: #efc3be;
+  --neutral: #43598a;
+  --neutral-bg: #eaeef7;
+  --neutral-line: #c5cee6;
+  --note-bg: #fff8e8;
+  --note-line: #ecd9a6;
+  --note-ink: #5b4a14;
+  --note-strong: #4a3a08;
+}
+
+/* dark mode: switched on by the toggle (app.py adds a .dark-flag marker) */
+.stApp:has(.dark-flag) {
+  --bg: #0d181d;
+  --surface: #14252c;
+  --mist: #12232a;
+  --ink: #e8f1f3;
+  --ink-soft: #c5d6da;
+  --muted: #9db3b9;
+  --line: #28434c;
+  --dash: #3f6872;
+  --track: #26404a;
+  --brand: #7fd3da;
+  --accent: #4fc1cb;
+  --btn: #138089;
+  --btn-hover: #1a97a2;
+  --code-bg: #1c3640;
+  --code-ink: #8fdde4;
+  --ok: #62d595;
+  --ok-bg: #123324;
+  --ok-line: #25563d;
+  --alert: #ff9a90;
+  --alert-bg: #3b1e1c;
+  --alert-line: #6a3430;
+  --neutral: #a9bbf2;
+  --neutral-bg: #1c2542;
+  --neutral-line: #34426e;
+  --note-bg: #38300f;
+  --note-line: #6b5a1e;
+  --note-ink: #f0dfa4;
+  --note-strong: #fff0bd;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+.stApp {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Public Sans', sans-serif;
+}
+
+.stApp p,
+.stApp li,
+.stApp label,
+.stApp [data-testid="stWidgetLabel"] p {
+  color: var(--ink);
+}
+
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4 {
+  font-family: 'Newsreader', serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stCaptionContainer"] * {
+  color: var(--muted);
+}
+
+p,
+li {
+  line-height: 1.65;
+}
+
+#MainMenu,
+footer {
+  visibility: hidden;
+}
+
+.block-container {
+  max-width: 1080px;
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+}
+
+/* top bar + navigation (forced to our colours so it never clashes with the system theme) */
+header[data-testid="stHeader"] {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+header[data-testid="stHeader"] a,
+header[data-testid="stHeader"] a *,
+header[data-testid="stHeader"] button,
+header[data-testid="stHeader"] button * {
+  color: var(--ink);
+}
+
+header[data-testid="stHeader"] a {
+  background: transparent;
+}
+
+header[data-testid="stHeader"] a:hover,
+header[data-testid="stHeader"] a[aria-current="page"] {
+  background: var(--mist);
+}
+
+/* brand strip */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .4rem 0;
+}
+
+.brand-name {
+  font-family: 'Newsreader', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+.brand-note {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.rule {
+  border-bottom: 1px solid var(--line);
+  margin: .4rem 0 2rem;
+}
+
+.dark-flag {
+  height: 0;
+  margin: 0;
+}
+
+@media (max-width:700px) {
+  .brand-note {
+    display: none
+  }
+}
+
+/* hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 2.5rem;
+}
+
+.stApp .hero h1 {
+  font-size: 2.9rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.stApp .hero p {
+  font-size: 1.08rem;
+  color: var(--muted);
+  max-width: 34rem;
+  margin: 0;
+}
+
+.hero svg {
+  width: 100%;
+  max-width: 300px;
+  justify-self: center;
+}
+
+@media (max-width:800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 1.5rem
+  }
+
+  .stApp .hero h1 {
+    font-size: 2.2rem
+  }
+}
+
+/* sections */
+.sec {
+  margin: 3rem 0 1rem;
+}
+
+.stApp .sec h2 {
+  font-size: 1.9rem;
+  margin: 0 0 .4rem;
+}
+
+.stApp .sec p.lead {
+  color: var(--muted);
+  max-width: 42rem;
+  margin: 0;
+}
+
+.classes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+@media (max-width:800px) {
+  .classes {
+    grid-template-columns: 1fr
+  }
+}
+
+.cls {
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-left-width: 5px;
+}
+
+.cls.ok {
+  border-left-color: var(--ok)
+}
+
+.cls.alert {
+  border-left-color: var(--alert)
+}
+
+.cls.neutral {
+  border-left-color: var(--neutral)
+}
+
+.stApp .cls h3 {
+  margin: 0;
+  font-size: 1.25rem
+}
+
+.cls code {
+  font-size: .8rem;
+  background: var(--code-bg);
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  color: var(--code-ink)
+}
+
+.stApp .cls p {
+  margin: .5rem 0 .7rem;
+  font-size: .95rem;
+  color: var(--muted)
+}
+
+.cls .n {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--ink)
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.2rem;
+}
+
+@media (max-width:800px) {
+  .two {
+    grid-template-columns: 1fr
+  }
+}
+
+.stApp .two h3 {
+  font-size: 1.25rem;
+  margin: 0 0 .3rem
+}
+
+.stApp .two p {
+  color: var(--muted);
+  margin: 0 0 1rem
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.2rem;
+  counter-reset: s;
+}
+
+@media (max-width:800px) {
+  .steps {
+    grid-template-columns: 1fr 1fr
+  }
+}
+
+.step {
+  border-top: 3px solid var(--accent);
+  padding-top: .8rem;
+  counter-increment: s;
+}
+
+.step::before {
+  content: counter(s);
+  font-family: 'Newsreader', serif;
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+.stApp .step h4 {
+  margin: .1rem 0 .3rem;
+  font-size: 1.05rem
+}
+
+.stApp .step p {
+  margin: 0;
+  font-size: .92rem;
+  color: var(--muted)
+}
+
+/* message boxes */
+.notice {
+  background: var(--note-bg);
+  border: 1px solid var(--note-line);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  font-size: .92rem;
+  color: var(--note-ink);
+  margin-top: 2.5rem;
+}
+
+.notice strong {
+  color: var(--note-strong)
+}
+
+.hint {
+  background: var(--mist);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  font-size: .95rem;
+  margin-top: .8rem;
+}
+
+.warn {
+  background: var(--note-bg);
+  border: 1px solid var(--note-line);
+  color: var(--note-ink);
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  font-size: .92rem;
+  margin-top: .8rem;
+}
+
+.demo {
+  background: var(--neutral-bg);
+  border: 1px solid var(--neutral-line);
+  color: var(--neutral);
+  border-radius: 8px;
+  padding: .6rem .9rem;
+  font-size: .9rem;
+  margin-bottom: 1rem
+}
+
+/* result card */
+.result {
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--line);
+}
+
+.result.ok {
+  background: var(--ok-bg);
+  border-color: var(--ok-line)
+}
+
+.result.alert {
+  background: var(--alert-bg);
+  border-color: var(--alert-line)
+}
+
+.result.neutral {
+  background: var(--neutral-bg);
+  border-color: var(--neutral-line)
+}
+
+.result .tag {
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: .2rem
+}
+
+.result.ok .tag {
+  color: var(--ok)
+}
+
+.result.alert .tag {
+  color: var(--alert)
+}
+
+.result.neutral .tag {
+  color: var(--neutral)
+}
+
+.stApp .result h2 {
+  margin: 0 0 .4rem;
+  font-size: 1.7rem
+}
+
+.stApp .result p {
+  margin: 0;
+  color: var(--ink-soft)
+}
+
+.conf {
+  font-family: 'Newsreader', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-top: .8rem;
+  line-height: 1;
+  color: var(--ink)
+}
+
+.conf small {
+  font-family: 'Public Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: .4rem
+}
+
+.bars {
+  margin-top: 1.2rem
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 56px;
+  gap: .7rem;
+  align-items: center;
+  margin: .45rem 0;
+  font-size: .92rem;
+  color: var(--ink)
+}
+
+.track {
+  background: var(--track);
+  border-radius: 99px;
+  height: 10px;
+  overflow: hidden
+}
+
+.fill {
+  height: 100%;
+  border-radius: 99px
+}
+
+.fill.ok {
+  background: var(--ok)
+}
+
+.fill.alert {
+  background: var(--alert)
+}
+
+.fill.neutral {
+  background: var(--neutral)
+}
+
+.bar-row .pct {
+  text-align: right;
+  font-variant-numeric: tabular-nums
+}
+
+/* streamlit widgets */
+.stApp [data-testid="stFileUploader"] section {
+  border: 2px dashed var(--dash);
+  background: var(--mist);
+  border-radius: 12px;
+}
+
+.stApp [data-testid="stFileUploader"] section *,
+.stApp [data-testid="stFileUploader"] small {
+  color: var(--ink);
+}
+
+.stApp [data-testid="stFileUploader"] button {
+  background: var(--btn);
+  border: 0;
+  border-radius: 8px;
+}
+
+.stApp [data-testid="stFileUploader"] button * {
+  color: #fff;
+}
+
+.stApp .stButton>button,
+.stApp [data-testid="stPageLink"] a {
+  background: var(--btn);
+  border: 0;
+  border-radius: 8px;
+  padding: .55rem 1.3rem;
+  font-weight: 600;
+}
+
+.stApp .stButton>button *,
+.stApp [data-testid="stPageLink"] a * {
+  color: #fff;
+}
+
+.stApp .stButton>button:hover,
+.stApp [data-testid="stPageLink"] a:hover {
+  background: var(--btn-hover);
+}
