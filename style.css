@@ -543,3 +543,34 @@ header[data-testid="stHeader"] a[aria-current="page"] {
 .stApp [data-testid="stPageLink"] a:hover {
   background: var(--btn-hover);
 }
+
+/* tabs + camera */
+.stApp [data-baseweb="tab-list"] {
+  border-bottom: 1px solid var(--line);
+}
+
+.stApp [data-baseweb="tab"],
+.stApp [data-baseweb="tab"] * {
+  color: var(--muted);
+  background: transparent;
+}
+
+.stApp [data-baseweb="tab"][aria-selected="true"],
+.stApp [data-baseweb="tab"][aria-selected="true"] * {
+  color: var(--ink);
+}
+
+.stApp [data-testid="stCameraInput"] button {
+  background: var(--btn);
+  border: 0;
+  border-radius: 8px;
+}
+
+.stApp [data-testid="stCameraInput"] button * {
+  color: #fff;
+}
+
+.stApp [data-testid="stCameraInput"] label,
+.stApp [data-testid="stCameraInput"] small {
+  color: var(--ink);
+}

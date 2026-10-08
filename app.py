@@ -24,7 +24,6 @@ LOW_CONFIDENCE = 0.60
 
 # -------------------------------------------------------------- your model
 @st.cache_resource
-@st.cache_resource
 def load_model():
     import torch
     from torch import nn
@@ -166,9 +165,16 @@ def analyze():
     st.markdown("## Analyze a CT scan")
     st.caption("Upload one chest CT slice. Images are processed in this session and are not saved.")
 
-    file = st.file_uploader("CT slice (PNG or JPG)", type=["png", "jpg", "jpeg"])
+    tab_upload, tab_camera = st.tabs(["Upload a file", "Use camera"])
+    with tab_upload:
+        uploaded = st.file_uploader("CT slice (PNG or JPG)", type=["png", "jpg", "jpeg"])
+    with tab_camera:
+        html('<div class="hint">Photos of a screen or printed film can pick up glare and distortion, which lowers accuracy. A file exported from the scanner works best.</div>')
+        photo = st.camera_input("Take a photo of the CT slice", label_visibility="collapsed")
+
+    file = uploaded or photo
     if file is None:
-        html('<div class="hint">Choose an image to begin. A slice through the middle of the chest gives the most reliable result.</div>')
+        html('<div class="hint">Choose an image or take a photo to begin. A slice through the middle of the chest gives the most reliable result.</div>')
         st.stop()
 
     raw = file.getvalue()
@@ -176,7 +182,7 @@ def analyze():
     left, right = st.columns([1, 1.15], gap="large")
 
     with left:
-        st.image(img, caption=file.name, use_container_width=True)
+        st.image(img, caption=getattr(file, "name", None) or "Camera photo", use_container_width=True)
         run = st.button("Analyze scan", type="primary")
 
     with right:
@@ -237,7 +243,3 @@ html('<div class="rule"></div>')
 home_page = st.Page(home, title="Home", icon=":material/home:", url_path="home", default=True)
 analyze_page = st.Page(analyze, title="Analyze a scan", icon=":material/biotech:", url_path="analyze")
 st.navigation([home_page, analyze_page], position="top").run()
-
-
-
-
